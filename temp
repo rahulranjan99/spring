@@ -1,0 +1,36 @@
+package com.Temprature.TempratureConvert.request;
+
+public class CelsiusToFahWebRequest {
+    public float tempIncel;
+}
+
+
+
+
+controller---------------------------------------------in rest API
+package com.Temprature.TempratureConvert.request;
+
+import com.Temprature.TempratureConvert.response.CelsuisToFahWebResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CelusisToFarController {
+    @PostMapping(value = "/tem/con", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CelsuisToFahWebResponse> CelsiusToFar (@RequestBody CelsiusToFahWebRequest celsiusToFahWebRequest) {
+        Float cel2Far = celsiusToFahWebRequest.tempIncel;
+        //Float celsius=  (fah2Cel − 32) × 5/9;
+        Float celsius1 = (cel2Far * Float.valueOf(1.8f));
+        Float cel2= Float.valueOf(32);
+        Float celsius=celsius1+cel2;
+        CelsuisToFahWebResponse celsuisToFahWebResponse = new CelsuisToFahWebResponse();
+        celsuisToFahWebResponse.TempInFar= celsius;
+        return new ResponseEntity<>(celsuisToFahWebResponse, HttpStatus.OK);
+    }
+}
+
+
